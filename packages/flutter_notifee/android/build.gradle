@@ -1,0 +1,57 @@
+group 'io.invertase.notifee.flutter_notifee'
+version '1.0'
+
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.5.0'
+    }
+}
+
+rootProject.allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        minSdkVersion 16
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+    compileOptions {
+        targetCompatibility = 1.8
+        sourceCompatibility = 1.8
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['notifee_core_release.aar'], dir: 'libs')
+    implementation 'androidx.concurrent:concurrent-futures:1.0.0'
+    implementation 'com.google.android.gms:play-services-tasks:17.0.0'
+    implementation 'androidx.work:work-runtime:2.3.0'
+    implementation 'androidx.core:core:1.2.0-rc01'
+    implementation "androidx.room:room-runtime:2.2.3"
+    implementation 'org.greenrobot:eventbus:3.1.1'
+
+    api 'io.jsonwebtoken:jjwt-api:0.10.7'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.10.7'
+    runtimeOnly('io.jsonwebtoken:jjwt-orgjson:0.10.7') {
+        exclude group: 'org.json', module: 'json'
+    }
+
+    annotationProcessor "androidx.room:room-compiler:2.2.3"
+    annotationProcessor 'org.greenrobot:eventbus-annotation-processor:3.1.1'
+}

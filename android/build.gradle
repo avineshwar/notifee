@@ -61,6 +61,7 @@ android.libraryVariants.all { variant ->
       }
     }
     into new File("$project.rootDir/../packages/react-native/android/libs")
+    into new File("$project.rootDir/../packages/flutter_notifee/android/libs")
   }
 
   project.tasks.getByName(assembleTaskName).finalizedBy(copyTaskName)
