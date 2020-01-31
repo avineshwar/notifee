@@ -13,6 +13,8 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import app.notifee.core.bundles.ChannelBundle;
 import app.notifee.core.bundles.ChannelGroupBundle;
@@ -29,6 +31,8 @@ public class Notifee {
   private static final String TAG = "API";
   private static Notifee mNotifee = null;
   private static NotifeeConfig mNotifeeConfig = null;
+
+  static final ExecutorService CACHED_THREAD_POOL = Executors.newCachedThreadPool();
 
   @KeepForSdk
   public static Notifee getInstance() {

@@ -1,9 +1,14 @@
+import 'dart:collection';
 import 'dart:math';
 
 void isNotNullOrEmpty(String key, String value) {
   String msg = 'Expedted property "$key" to be a non-null and non-empty value.';
   assert(value != null, msg);
   assert(value.isNotEmpty, msg);
+}
+
+abstract class NotifeeBridge {
+  Map build();
 }
 
 class IdGenerator {
@@ -24,4 +29,33 @@ class IdGenerator {
 
     return stringBuffer.toString();
   }
+}
+
+abstract class Enum<T> {
+  final T _value;
+
+  const Enum(this._value);
+
+  T get value => _value;
+}
+
+Map convertLinkedHashMap<K, V>(LinkedHashMap linkedHashMap) {
+  if (linkedHashMap == null) {
+    return null;
+  }
+
+  if (linkedHashMap.isEmpty) {
+    return new Map<K, V>();
+  }
+
+  return Map.from(linkedHashMap.map((key, value) {
+    if (value is LinkedHashMap) {
+      return MapEntry(key.toString(), convertLinkedHashMap<String, dynamic>(value));
+    }
+
+    return MapEntry(
+      key as K,
+      value as V,
+    );
+  }));
 }

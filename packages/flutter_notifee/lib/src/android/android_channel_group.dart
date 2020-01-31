@@ -29,12 +29,19 @@ class NotifeeAndroidChannelGroup extends NotifeeBridge {
 class NotifeeNativeAndroidChannelGroup extends NotifeeAndroidChannelGroup {
   bool blocked;
 
+  static NotifeeNativeAndroidChannelGroup fromMap(Map map) {
+    return NotifeeNativeAndroidChannelGroup(
+      id: map['id'],
+      name: map['name'],
+      description: map['description'],
+      blocked: map['blocked'],
+    );
+  }
+
   NotifeeNativeAndroidChannelGroup({
     @required String id,
     @required String name,
+    String description,
     this.blocked = false,
-  }) : super(
-    id: id,
-    name: name
-  );
+  }) : super(id: id, name: name, description: description);
 }

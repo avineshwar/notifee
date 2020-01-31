@@ -9,6 +9,7 @@ class NotifeeAndroidChannel extends NotifeeBridge {
   bool lights = true;
   bool vibration = true;
   String groupId;
+  NotifeeAndroidImportance importance;
   String sound;
 
   NotifeeAndroidChannel({
@@ -20,7 +21,7 @@ class NotifeeAndroidChannel extends NotifeeBridge {
     this.lights = true,
     this.vibration = true,
     this.groupId,
-    // importance
+    this.importance = NotifeeAndroidImportance.DEFAULT,
     // lightColor
     // visibility
     // vibrationPattern
@@ -43,6 +44,7 @@ class NotifeeAndroidChannel extends NotifeeBridge {
     if (description != null) channelMap['description'] = description;
     if (groupId != null) channelMap['groupId'] = groupId;
     if (sound != null) channelMap['sound'] = sound;
+    if (importance != null) channelMap['importance'] = importance.value;
 
     return channelMap;
   }
@@ -50,6 +52,20 @@ class NotifeeAndroidChannel extends NotifeeBridge {
 
 class NotifeeNativeAndroidChannel extends NotifeeAndroidChannel {
   bool blocked;
+
+  static NotifeeNativeAndroidChannel fromMap(Map map) {
+    return NotifeeNativeAndroidChannel(
+      id: map['id'],
+      name: map['name'],
+      badge: map['badge'],
+      bypassDnd: map['bypassDnd'],
+      description: map['description'],
+      lights: map['lights'],
+      groupId: map['groupId'],
+      sound: map['sound'],
+      blocked: map['blocked'],
+    );
+  }
 
   NotifeeNativeAndroidChannel({
     @required String id,
@@ -67,16 +83,15 @@ class NotifeeNativeAndroidChannel extends NotifeeAndroidChannel {
     String sound,
     this.blocked = false,
   }) : super(
-    id: id,
-    name: name,
-    badge: badge,
-    bypassDnd: bypassDnd,
-    description: description,
-    lights: lights,
-    vibration: vibration,
-    groupId: groupId,
-    sound: sound
-  );
+            id: id,
+            name: name,
+            badge: badge,
+            bypassDnd: bypassDnd,
+            description: description,
+            lights: lights,
+            vibration: vibration,
+            groupId: groupId,
+            sound: sound);
 
   Map build() {
     Map channelMap = super.build();

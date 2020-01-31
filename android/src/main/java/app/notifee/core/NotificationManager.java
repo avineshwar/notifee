@@ -26,8 +26,6 @@ import com.google.android.gms.tasks.Tasks;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
@@ -40,12 +38,12 @@ import app.notifee.core.events.NotificationEvent;
 import app.notifee.core.utils.ResourceUtils;
 import app.notifee.core.utils.TextUtils;
 
+import static app.notifee.core.Notifee.CACHED_THREAD_POOL;
 import static app.notifee.core.ReceiverService.ACTION_PRESS_INTENT;
 import static app.notifee.core.Worker.WORK_TYPE_NOTIFICATION_SCHEDULE;
 
 class NotificationManager {
   private static final String TAG = "NotificationManager";
-  private static final ExecutorService CACHED_THREAD_POOL = Executors.newCachedThreadPool();
 
   private static Task<NotificationCompat.Builder> notificationBundleToBuilder(
     NotificationBundle notificationBundle

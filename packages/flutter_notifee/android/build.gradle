@@ -43,8 +43,9 @@ dependencies {
     implementation 'com.google.android.gms:play-services-tasks:17.0.0'
     implementation 'androidx.work:work-runtime:2.3.0'
     implementation 'androidx.core:core:1.2.0-rc01'
-    implementation "androidx.room:room-runtime:2.2.3"
+    implementation 'androidx.room:room-runtime:2.2.3'
     implementation 'org.greenrobot:eventbus:3.1.1'
+    implementation 'com.facebook.fresco:fresco:2.1.0'
 
     api 'io.jsonwebtoken:jjwt-api:0.10.7'
     runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.10.7'

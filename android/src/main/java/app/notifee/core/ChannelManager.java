@@ -19,6 +19,7 @@ import app.notifee.core.bundles.ChannelBundle;
 import app.notifee.core.bundles.ChannelGroupBundle;
 
 import static androidx.core.app.NotificationManagerCompat.IMPORTANCE_NONE;
+import static app.notifee.core.Notifee.CACHED_THREAD_POOL;
 
 public class ChannelManager {
 
@@ -75,7 +76,7 @@ public class ChannelManager {
   }
 
   static Task<Void> createChannelGroup(ChannelGroupBundle channelGroupBundle) {
-    return Tasks.call(() -> {
+    return Tasks.call(CACHED_THREAD_POOL, () -> {
       if (Build.VERSION.SDK_INT < 26) {
         return null;
       }
@@ -97,7 +98,7 @@ public class ChannelManager {
   }
 
   static Task<Void> createChannelGroups(List<ChannelGroupBundle> channelGroupBundles) {
-    return Tasks.call(() -> {
+    return Tasks.call(CACHED_THREAD_POOL, () -> {
       if (Build.VERSION.SDK_INT < 26) {
         return null;
       }
